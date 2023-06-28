@@ -1,5 +1,6 @@
 package com.aspire.lms.model;
 
+import com.aspire.lms.model.enums.CurrencyTypes;
 import com.aspire.lms.model.enums.RepaymentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,6 +30,8 @@ public class Repayment {
     private Date repaymentDate;
 
     private Float repaymentAmount;
+
+    private CurrencyTypes currency;
 
     private String paymentTransactionId;
 

@@ -1,33 +1,33 @@
 package com.aspire.lms.controller;
 
-import com.aspire.lms.exception.ResourceNotFoundException;
-import com.aspire.lms.model.Customer;
-import com.aspire.lms.services.CustomerService;
+import com.aspire.lms.exception.EntityNotFoundException;
+import com.aspire.lms.model.User;
+import com.aspire.lms.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("v1/customer")
+@RequestMapping("v1/customers")
 public class CustomerController {
     @Autowired
-    private CustomerService customerService;
+    private UserService customerService;
 
     @PostMapping("")
-    public Customer createCustomer(Customer customer) {
-        return customerService.create(customer);
+    public User createCustomer(@RequestBody User customer) {
+        return customerService.createCustomer(customer);
     }
 
     @GetMapping("")
-    public List<Customer> getCustomers() {
-        return customerService.getAll();
+    public List<User> getCustomers() {
+        return customerService.getAllCustomers();
     }
 
     @GetMapping("/{id}")
-    public Customer getCustomerById(
+    public User getCustomerById(
             @PathVariable(value = "id") Long customerId)
-            throws ResourceNotFoundException {
+            throws EntityNotFoundException {
         return customerService.getCustomerById(customerId);
     }
 }

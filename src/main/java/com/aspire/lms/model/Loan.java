@@ -1,6 +1,7 @@
 package com.aspire.lms.model;
 
 import com.aspire.lms.model.enums.CurrencyTypes;
+import com.aspire.lms.model.enums.LoanStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -19,14 +21,16 @@ public class Loan {
 
     @OneToOne
     @JoinColumn(name = "customer.id")
-    private Customer customer;
+    private User customer;
 
-    private Float amount;
+    private float amount;
 
     private CurrencyTypes currency;
 
-    private Integer term;
+    private int term;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date startDate;
+    private LoanStatus status;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern = "yyyy-MM-dd")
+    private LocalDate startDate;
 }
