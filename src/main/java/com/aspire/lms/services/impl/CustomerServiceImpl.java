@@ -1,35 +1,35 @@
 package com.aspire.lms.services.impl;
 
-import com.aspire.lms.exception.ResourceNotFoundException;
-import com.aspire.lms.model.Customer;
-import com.aspire.lms.repository.CustomerRepository;
-import com.aspire.lms.services.CustomerService;
+import com.aspire.lms.exception.EntityNotFoundException;
+import com.aspire.lms.model.User;
+import com.aspire.lms.repository.UserRepository;
+import com.aspire.lms.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CustomerServiceImpl implements CustomerService {
+public class CustomerServiceImpl implements UserService {
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private UserRepository customerRepository;
 
 
     @Override
-    public Customer create(Customer customer) {
+    public User createCustomer(User customer) {
         return customerRepository.save(customer);
     }
 
     @Override
-    public List<Customer> getAll() {
+    public List<User> getAllCustomers() {
         return customerRepository.findAll();
     }
 
     @Override
-    public Customer getCustomerById(Long id) throws ResourceNotFoundException {
+    public User getCustomerById(Long id) throws EntityNotFoundException {
         return customerRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("No customer found with id: "+ id)
+                () -> new EntityNotFoundException("No customer found with id: "+ id)
         );
     }
 }
