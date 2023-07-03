@@ -2,8 +2,6 @@ package com.aspire.lms.controller;
 
 import com.aspire.lms.dto.LoanApproveDTO;
 import com.aspire.lms.dto.LoanDTO;
-import com.aspire.lms.dto.RepaymentDTO;
-import com.aspire.lms.exception.IllegalStateException;
 import com.aspire.lms.exception.InsufficientPrivilegesException;
 import com.aspire.lms.exception.EntityNotFoundException;
 import com.aspire.lms.model.Loan;
@@ -24,7 +22,7 @@ public class LoanController {
     private UserService userService;
 
     @PostMapping("")
-    public Loan createLoan(@RequestBody LoanDTO loan) {
+    public Loan createLoan(@RequestBody LoanDTO loan) throws EntityNotFoundException {
         return loanService.save(loan);
     }
 
@@ -35,7 +33,7 @@ public class LoanController {
     throws EntityNotFoundException {
         // Check to ensure that only users with admin role can approve a loan
         Long userId = loanApproveDTO.getUserId();
-        User user = userService.getCustomerById(userId);
+        User user = userService.getUserById(userId);
         if(!user.getRole().equals(UserRole.ADMIN)) {
             throw new EntityNotFoundException("Loan approval requires admin role");
         }
@@ -51,18 +49,10 @@ public class LoanController {
             throws EntityNotFoundException, InsufficientPrivilegesException {
         // Policy check to ensure that a customer can only view their own loans
         Loan loan = loanService.getLoan(loanId);
-        if(loan.getCustomer().getId().equals(requestingUserId)) {
+        if(loan.getUser().getId().equals(requestingUserId)) {
             return loanService.getLoan(loanId);
         } else {
             throw new InsufficientPrivilegesException("Loan can only be viewed by the loan taker");
         }
-    }
-
-    @PostMapping("{id}/repayments")
-    public boolean addLoanRepayment(@PathVariable(value = "id") Long loanId,
-                                    @RequestBody RepaymentDTO repayment)
-            throws EntityNotFoundException, IllegalStateException {
-        loanService.addLoanRepayment(loanId, repayment);
-        return true;
     }
 }

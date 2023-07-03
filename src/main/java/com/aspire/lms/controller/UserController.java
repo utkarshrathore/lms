@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("v1/customers")
-public class CustomerController {
+@RequestMapping("v1/users")
+public class UserController {
     @Autowired
-    private UserService customerService;
+    private UserService userService;
 
     @PostMapping("")
-    public User createCustomer(@RequestBody User customer) {
-        return customerService.createCustomer(customer);
+    public User save(@RequestBody User user) {
+        return userService.save(user);
     }
 
     @GetMapping("")
-    public List<User> getCustomers() {
-        return customerService.getAllCustomers();
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    public User getCustomerById(
-            @PathVariable(value = "id") Long customerId)
+    public User getUserById(
+            @PathVariable(value = "id") Long userId)
             throws EntityNotFoundException {
-        return customerService.getCustomerById(customerId);
+        return userService.getUserById(userId);
     }
 }

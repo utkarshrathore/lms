@@ -16,6 +16,8 @@ public class LoanDTO {
 
     private int term;
 
+    private Long userId;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 }

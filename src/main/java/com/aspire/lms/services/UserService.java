@@ -6,8 +6,8 @@ import com.aspire.lms.model.User;
 import java.util.List;
 
 public interface UserService {
-    User createCustomer(User customer);
-    List<User> getAllCustomers();
+    User save(User user);
+    List<User> getAllUsers();
 
-    User getCustomerById(Long id) throws EntityNotFoundException;
+    User getUserById(Long id) throws EntityNotFoundException;
 }
