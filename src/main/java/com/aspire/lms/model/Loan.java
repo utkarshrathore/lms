@@ -10,7 +10,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
@@ -20,8 +19,8 @@ public class Loan {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "customer.id")
-    private User customer;
+    @JoinColumn(name = "user.id")
+    private User user;
 
     private float amount;
 
@@ -29,6 +28,7 @@ public class Loan {
 
     private int term;
 
+    @Enumerated(EnumType.STRING)
     private LoanStatus status;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern = "yyyy-MM-dd")

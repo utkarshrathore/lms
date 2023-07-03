@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -35,5 +34,6 @@ public class Repayment {
 
     private String paymentTransactionId;
 
+    @Enumerated(EnumType.STRING)
     private RepaymentStatus status;
 }

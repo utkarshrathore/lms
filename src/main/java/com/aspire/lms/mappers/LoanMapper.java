@@ -4,7 +4,7 @@ import com.aspire.lms.dto.LoanDTO;
 import com.aspire.lms.model.Loan;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface LoanMapper {
     LoanDTO loanToLoanDTO(Loan loan);
 

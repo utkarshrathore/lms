@@ -7,10 +7,9 @@ import com.aspire.lms.exception.IllegalStateException;
 import com.aspire.lms.model.Loan;
 
 public interface LoanService {
-    Loan save(LoanDTO loanDTO);
+    Loan save(LoanDTO loanDTO) throws EntityNotFoundException;
+
+    Loan saveLoan(Loan loan);
     boolean approveLoan(Long loanId);
     Loan getLoan(Long loanId) throws EntityNotFoundException;
-
-    void addLoanRepayment(Long loanId, RepaymentDTO repaymentDTO) throws EntityNotFoundException, IllegalStateException;
-
 }
